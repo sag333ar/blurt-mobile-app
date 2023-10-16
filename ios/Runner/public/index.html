@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Blurt Mobile App</title>
+    </head>
+    <body>
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <script src="https://unpkg.com/@beblurt/dblurt@latest/dist/dblurt.js"></script>
+        <script>
+            const client = new dblurt.Client([
+                                       "https://rpc.beblurt.com",
+                                       "https://rpc.blurt.world",
+                                       "https://blurt-rpc.saboin.com",
+                                       "https://blurt-rpc.sagarkothari88.one",
+                                       ], { timeout: 1500 });
+
+                                       async function getChainProps(identifier) {
+                                           const props = await client.database.getChainProperties();
+                                           console.log(`Maximum blocksize consensus: ${props.maximum_block_size} bytes`);
+                                           replyToNative({
+                                               id: identifier,
+                                               type: 'getChainProps',
+                                               data: JSON.stringify(props),
+                                               valid: true,
+                                               error: ''
+                                           })
+                                       }
+
+            function replyToNative(result) {
+                console.log(`Result is ${JSON.stringify(result)}`);
+                window.webkit.messageHandlers.app.postMessage(result);
+            }
+        </script>
+    </body>
+</html>
