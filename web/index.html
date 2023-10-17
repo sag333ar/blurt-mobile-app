@@ -31,6 +31,7 @@
 
   <title>blurt_mobile_app</title>
   <link rel="manifest" href="manifest.json">
+  <script src="https://unpkg.com/@beblurt/dblurt@latest/dist/dblurt.js"></script>
 
   <script>
     // The value below is injected by flutter build, do not touch.
@@ -54,6 +55,37 @@
         }
       });
     });
+    const client = new dblurt.Client(
+        [
+          "https://rpc.beblurt.com",
+          "https://rpc.blurt.world",
+          "https://blurt-rpc.saboin.com",
+          "https://blurt-rpc.sagarkothari88.one",
+        ],
+        { timeout: 1500 }
+      );
+
+      async function getChainProps(identifier) {
+        const props = await client.condenser.getChainProperties();
+        return JSON.stringify({
+          id: identifier,
+          type: "getChainProps",
+          data: props,
+          valid: true,
+          error: ""
+        });
+      }
+
+      async function getFeed(identifier, type) {
+        var response = await client.condenser.getDiscussions(type);
+        return JSON.stringify({
+          id: identifier,
+          type: "getFeed",
+          data: response,
+          valid: true,
+          error: ""
+        });
+      }
   </script>
 </body>
 </html>
