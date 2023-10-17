@@ -46,7 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          call();
+          getChainProps();
+          getFeedType('trending');
         },
         child: const Icon(Icons.bolt),
       ),

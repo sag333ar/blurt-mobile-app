@@ -1,24 +1,23 @@
 import 'dart:js_interop';
 import 'dart:js_util';
-import 'dart:developer';
 
 @JS()
-external getChainProps(identifier);
+external _getChainProps(identifier);
 @JS()
-external getFeed(identifier, type);
+external _getFeed(identifier, type);
 
-void call() async {
+void getChainProps() async {
   var id = 'getChainProps_${DateTime.now().toIso8601String()}';
-  var promise = getChainProps(id);
+  var promise = _getChainProps(id);
   var contentData = await promiseToFuture(promise);
 
   print(contentData);
+}
 
+void getFeedType(String feedType) async {
   var feedId = 'getFeed_${DateTime.now().toIso8601String()}';
-  var promiseFeed = getFeed(feedId, 'trending');
+  var promiseFeed = _getFeed(feedId, feedType);
   var contentDataFeed = await promiseToFuture(promiseFeed);
 
   print(contentDataFeed);
-
-  log('web service');
 }
