@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -27,10 +28,11 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>blurt_mobile_app</title>
   <link rel="manifest" href="manifest.json">
+  <script src="https://unpkg.com/@beblurt/dblurt@latest/dist/dblurt.js"></script>
 
   <script>
     // The value below is injected by flutter build, do not touch.
@@ -39,21 +41,54 @@
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
 </head>
+
 <body>
   <script>
-    window.addEventListener('load', function(ev) {
+    window.addEventListener('load', function (ev) {
       // Download main.dart.js
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         },
-        onEntrypointLoaded: function(engineInitializer) {
-          engineInitializer.initializeEngine().then(function(appRunner) {
+        onEntrypointLoaded: function (engineInitializer) {
+          engineInitializer.initializeEngine().then(function (appRunner) {
             appRunner.runApp();
           });
         }
       });
     });
+    const client = new dblurt.Client(
+      [
+        "https://rpc.beblurt.com",
+        "https://rpc.blurt.world",
+        "https://blurt-rpc.saboin.com",
+        "https://blurt-rpc.sagarkothari88.one",
+      ],
+      { timeout: 1500 }
+    );
+
+    async function getChainProps(identifier) {
+      const props = await client.condenser.getChainProperties();
+      return JSON.stringify({
+        id: identifier,
+        type: "getChainProps",
+        data: JSON.stringify(props),
+        valid: true,
+        error: ""
+      });
+    }
+
+    async function getFeed(identifier, type) {
+      var response = await client.condenser.getDiscussions(type);
+      return JSON.stringify({
+        id: identifier,
+        type: "getFeed",
+        data: JSON.stringify(response),
+        valid: true,
+        error: ""
+      });
+    }
   </script>
 </body>
+
 </html>
