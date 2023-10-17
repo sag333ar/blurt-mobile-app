@@ -1,23 +1,24 @@
 import 'dart:js_interop';
 import 'dart:js_util';
 
-@JS()
-external _getChainProps(identifier);
-@JS()
-external _getFeed(identifier, type);
+import 'package:blurt_mobile_app/resources/enum.dart';
 
-void getChainProps() async {
-  var id = 'getChainProps_${DateTime.now().toIso8601String()}';
-  var promise = _getChainProps(id);
+@JS()
+external getChainProps(identifier);
+@JS()
+external getFeed(identifier, type);
+
+Future<String> getChainPropsFromNative() async {
+  final String chainPropId =
+      'getChainProps_${DateTime.now().toIso8601String()}';
+  var promise = getChainProps(chainPropId);
   var contentData = await promiseToFuture(promise);
-
-  print(contentData);
+  return contentData;
 }
 
-void getFeedType(String feedType) async {
-  var feedId = 'getFeed_${DateTime.now().toIso8601String()}';
-  var promiseFeed = _getFeed(feedId, feedType);
-  var contentDataFeed = await promiseToFuture(promiseFeed);
-
-  print(contentDataFeed);
+Future<String> getFeedTypeFromNative(FeedType feedType) async {
+  final String feedId = 'getFeed_${DateTime.now().toIso8601String()}';
+  var promise = getFeed(feedId, enumToString(feedType));
+  var contentData = await promiseToFuture(promise);
+  return contentData;
 }
