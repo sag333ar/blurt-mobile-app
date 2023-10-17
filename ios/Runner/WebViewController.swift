@@ -40,6 +40,13 @@ class WebViewController: UIViewController {
             self.webView?.evaluateJavaScript("getChainProps('\(id)');")
         }
     }
+
+    func getFeed(id: String, type: String, handler: @escaping (String) -> Void) {
+        handlers[id] = handler
+        OperationQueue.main.addOperation {
+            self.webView?.evaluateJavaScript("getFeed('\(id)', '\(type)');")
+        }
+    }
 }
 
 extension WebViewController: WKNavigationDelegate {

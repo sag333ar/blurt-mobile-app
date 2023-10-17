@@ -47,6 +47,9 @@ class AppBridge: NSObject {
             switch (call.method) {
                 case "getChainProps":
                     webVC.getChainProps(id: id) { text in result(text) }
+                case "getFeed":
+                    let type = arguments ["feed_type"] as? String ?? "trending"
+                    webVC.getFeed(id: id, type: type) { text in result(text) }
                 default:
                     result(FlutterMethodNotImplemented)
             }

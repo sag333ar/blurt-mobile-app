@@ -51,6 +51,13 @@ class _MyHomePageState extends State<MyHomePage> {
             'id': id,
           });
           log('Response received from platform is - $response');
+
+          var feedId = 'getFeed_${DateTime.now().toIso8601String()}';
+          final String feedResponse = await platform.invokeMethod('getFeed', {
+            'id': feedId,
+            'feed_type': 'trending', // trending, hot, created
+          });
+          log('Response received from platform is - $feedResponse');
         },
         child: const Icon(Icons.bolt),
       ),

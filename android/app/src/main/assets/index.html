@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://unpkg.com/@beblurt/dblurt@latest/dist/dblurt.js"></script>
-  <title>Blurt Mobile App</title>
-</head>
-<body>
-<noscript>You need to enable JavaScript to run this app.</noscript>
-<script>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://unpkg.com/@beblurt/dblurt@latest/dist/dblurt.js"></script>
+    <title>Blurt Mobile App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <script>
       const client = new dblurt.Client(
         [
           "https://rpc.beblurt.com",
@@ -42,9 +42,9 @@
       }
 
       function replyToNative(result) {
-        window.webkit.messageHandlers.app.postMessage(result);
-        // Android.postMessage(JSON.stringify(result));
+        // window.webkit.messageHandlers.app.postMessage(result);
+        Android.postMessage(JSON.stringify(result));
       }
     </script>
-</body>
+  </body>
 </html>
