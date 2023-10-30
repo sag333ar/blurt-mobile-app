@@ -1,10 +1,10 @@
 import 'package:blurt_mobile_app/resources/enum.dart';
 
-Future<String> getChainPropsFromNative() {
+Future<String> getChainPropsFromPlatform() {
   return _error();
 }
 
-Future<String> getFeedTypeFromNative(FeedType feedType) {
+Future<String> getFeedTypeFromPlatform(FeedType feedType) {
   return _error();
 }
 

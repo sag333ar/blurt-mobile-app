@@ -1,4 +1,4 @@
-enum FeedType{trending,hot}
+enum FeedType{trending,hot,created}
 
 
    String enumToString(Object o) => o.toString().split('.').last;

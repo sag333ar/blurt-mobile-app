@@ -8,7 +8,7 @@ external getChainProps(identifier);
 @JS()
 external getFeed(identifier, type);
 
-Future<String> getChainPropsFromNative() async {
+Future<String> getChainPropsFromPlatform() async {
   final String chainPropId =
       'getChainProps_${DateTime.now().toIso8601String()}';
   var promise = getChainProps(chainPropId);
@@ -16,7 +16,7 @@ Future<String> getChainPropsFromNative() async {
   return contentData;
 }
 
-Future<String> getFeedTypeFromNative(FeedType feedType) async {
+Future<String> getFeedTypeFromPlatform(FeedType feedType) async {
   final String feedId = 'getFeed_${DateTime.now().toIso8601String()}';
   var promise = getFeed(feedId, enumToString(feedType));
   var contentData = await promiseToFuture(promise);

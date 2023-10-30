@@ -21,8 +21,4 @@ class BeneficiaryModel {
         weight: json["weight"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "account": account,
-        "weight": weight,
-    };
 }

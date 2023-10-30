@@ -25,10 +25,4 @@ class ActiveVoteModel {
         rshares: json["rshares"],
         percent: json["percent"],
     );
-
-    Map<String, dynamic> toJson() => {
-        "voter": voter,
-        "rshares": rshares,
-        "percent": percent,
-    };
 }
