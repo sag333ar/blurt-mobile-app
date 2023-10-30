@@ -1,8 +1,7 @@
+import 'package:blurt_mobile_app/resources/enum.dart';
+import 'package:blurt_mobile_app/services/api_service.dart';
 import 'package:flutter/material.dart';
 
-import 'package:blurt_mobile_app/services/service.dart'
-    if (dart.library.io) 'package:blurt_mobile_app/services/mobile_service.dart'
-    if (dart.library.html) 'package:blurt_mobile_app/services/web_service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,8 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          getChainProps();
-          getFeedType('trending');
+          ApiService().getChainProps();
+          ApiService().getFeed(FeedType.trending);
         },
         child: const Icon(Icons.bolt),
       ),
